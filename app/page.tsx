@@ -3,6 +3,7 @@ import { HeroBlock } from "@/components/hero-block"
 import { CategorySection } from "@/components/category-section"
 import { InterviewModule } from "@/components/interview-module"
 import { AdSlot } from "@/components/ad-slot"
+import { TajaaButtons } from "@/components/tajaa-buttons"
 import { POSTS } from "@/lib/mock-data"
 
 export default function HomePage() {
@@ -21,6 +22,11 @@ export default function HomePage() {
 
         {/* Hero block */}
         <HeroBlock featured={hero} secondary={rest.slice(0, 4)} />
+
+        {/* ताजा / लोकप्रिय pill buttons */}
+        <div className="py-3">
+          <TajaaButtons />
+        </div>
 
         {/* Ad — leaderboard desktop, banner mobile */}
         <div className="py-4">

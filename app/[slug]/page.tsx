@@ -9,6 +9,7 @@ import { PostCardArchive } from "@/components/post-cards"
 import { PostListItem } from "@/components/post-cards"
 import { AdSlot } from "@/components/ad-slot"
 import { POSTS, getPostBySlug } from "@/lib/mock-data"
+import { CommentForm } from "@/components/comment-form"
 import type { Metadata } from "next"
 
 interface Props {
@@ -159,7 +160,7 @@ export default async function SinglePostPage({ params }: Props) {
                   {post.author}
                 </Link>
                 <p className="text-sm text-[#757575] mt-1">
-                  वरिष्ठ पत्रकार, दरबार खबर। राजनीति, कूटनीति र सामाजिक मुद्दाहरूमा विशेषज्ञता।
+                  वरिष्ठ पत्रकार, दरबार खबर। राजनीति, कूटनी���ि र सामाजिक मुद्दाहरूमा विशेषज्ञता।
                 </p>
               </div>
             </div>
@@ -183,40 +184,7 @@ export default async function SinglePostPage({ params }: Props) {
               <h2 className="text-base font-bold uppercase tracking-wide text-[#141414] border-b-2 border-[#B5121B] pb-2 inline-block mb-6">
                 टिप्पणी
               </h2>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-              >
-                <input
-                  type="text"
-                  placeholder="नाम *"
-                  required
-                  aria-label="नाम"
-                  className="border border-[#E0E0E0] px-3 py-2 text-sm outline-none focus:border-[#B5121B] transition-colors"
-                />
-                <input
-                  type="email"
-                  placeholder="इमेल *"
-                  required
-                  aria-label="इमेल"
-                  className="border border-[#E0E0E0] px-3 py-2 text-sm outline-none focus:border-[#B5121B] transition-colors"
-                />
-                <textarea
-                  placeholder="तपाईँको टिप्पणी..."
-                  rows={4}
-                  required
-                  aria-label="टिप्पणी"
-                  className="sm:col-span-2 border border-[#E0E0E0] px-3 py-2 text-sm outline-none focus:border-[#B5121B] transition-colors resize-none"
-                />
-                <div className="sm:col-span-2">
-                  <button
-                    type="submit"
-                    className="bg-[#B5121B] text-white text-sm font-semibold px-6 py-2.5 hover:bg-[#9a0f17] transition-colors"
-                  >
-                    टिप्पणी पठाउनुहोस्
-                  </button>
-                </div>
-              </form>
+              <CommentForm />
             </div>
           </article>
 

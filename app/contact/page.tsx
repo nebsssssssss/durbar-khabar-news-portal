@@ -1,5 +1,6 @@
 import { SiteLayout } from "@/components/site-layout"
 import { Breadcrumb } from "@/components/breadcrumb"
+import { ContactForm } from "@/components/contact-form"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -18,41 +19,7 @@ export default function ContactPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-6">
             {/* Form */}
-            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-4">
-              <input
-                type="text"
-                placeholder="नाम *"
-                required
-                aria-label="नाम"
-                className="border border-[#E0E0E0] px-3 py-2.5 text-sm outline-none focus:border-[#B5121B] transition-colors"
-              />
-              <input
-                type="email"
-                placeholder="इमेल *"
-                required
-                aria-label="इमेल"
-                className="border border-[#E0E0E0] px-3 py-2.5 text-sm outline-none focus:border-[#B5121B] transition-colors"
-              />
-              <input
-                type="text"
-                placeholder="विषय"
-                aria-label="विषय"
-                className="border border-[#E0E0E0] px-3 py-2.5 text-sm outline-none focus:border-[#B5121B] transition-colors"
-              />
-              <textarea
-                placeholder="सन्देश *"
-                rows={5}
-                required
-                aria-label="सन्देश"
-                className="border border-[#E0E0E0] px-3 py-2.5 text-sm outline-none focus:border-[#B5121B] transition-colors resize-none"
-              />
-              <button
-                type="submit"
-                className="bg-[#B5121B] text-white text-sm font-semibold px-6 py-2.5 hover:bg-[#9a0f17] transition-colors self-start"
-              >
-                पठाउनुहोस्
-              </button>
-            </form>
+            <ContactForm />
 
             {/* Info */}
             <div className="text-sm text-[#555] leading-[1.8] space-y-3">

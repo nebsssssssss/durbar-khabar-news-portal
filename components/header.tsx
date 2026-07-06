@@ -6,6 +6,7 @@ import { Logo } from "@/components/logo"
 import { BreakingTicker } from "@/components/breaking-ticker"
 import { SearchOverlay } from "@/components/search-overlay"
 import { MobileNav, DesktopNav } from "@/components/nav-menu"
+import { TajaaOverlay } from "@/components/tajaa-overlay"
 
 // Social icon SVGs
 function IconYouTube() {
@@ -41,6 +42,13 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [overlayOpen, setOverlayOpen] = useState(false)
+  const [overlayTab, setOverlayTab] = useState<"tajaa" | "popular">("tajaa")
+
+  function openOverlay(tab: "tajaa" | "popular") {
+    setOverlayTab(tab)
+    setOverlayOpen(true)
+  }
 
   useEffect(() => {
     function onScroll() { setScrolled(window.scrollY > 60) }

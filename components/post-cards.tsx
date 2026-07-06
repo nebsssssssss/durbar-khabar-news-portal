@@ -18,7 +18,7 @@ export function CategoryTag({ label, slug }: { label: string; slug: string }) {
 export function PostCardLarge({ post }: { post: Post }) {
   return (
     <article className="group">
-      <Link href={`/${post.slug}`} className="block overflow-hidden rounded-sm">
+      <Link href={`/${post.slug}`} className="block overflow-hidden">
         <div className="relative w-full aspect-video overflow-hidden bg-[#F5F5F3]">
           <Image
             src={post.image}
@@ -31,13 +31,13 @@ export function PostCardLarge({ post }: { post: Post }) {
       </Link>
       <div className="pt-2.5">
         <CategoryTag label={post.category} slug={post.categorySlug} />
-        <h2 className="font-khand font-bold text-[18px] sm:text-[20px] leading-snug text-[#141414] group-hover:text-[#B5121B] transition-colors mt-2 mb-1.5">
+        <h2 className="font-khand font-bold text-[19px] sm:text-[21px] leading-snug text-[#141414] group-hover:text-[#B5121B] transition-colors mt-1.5 mb-1.5">
           <Link href={`/${post.slug}`}>{post.title}</Link>
         </h2>
         <p className="font-mukta text-[13px] text-[#555] leading-relaxed line-clamp-2 mb-2 hidden sm:block">
           {post.excerpt}
         </p>
-        <div className="flex items-center gap-2 font-mukta text-[12px] text-[#888]">
+        <div className="flex items-center gap-2 font-mukta text-[12px] text-[#999]">
           <span>{post.author}</span>
           <span aria-hidden="true">·</span>
           <time>{post.date}</time>
@@ -51,13 +51,13 @@ export function PostCardLarge({ post }: { post: Post }) {
 export function PostCardSmall({ post }: { post: Post }) {
   return (
     <article className="group flex gap-3 items-start">
-      <Link href={`/${post.slug}`} className="flex-shrink-0 rounded-sm overflow-hidden">
-        <div className="relative w-[84px] h-[60px] sm:w-[96px] sm:h-[68px] overflow-hidden bg-[#F5F5F3]">
+      <Link href={`/${post.slug}`} className="flex-shrink-0 overflow-hidden">
+        <div className="relative w-[80px] h-[56px] sm:w-[90px] sm:h-[64px] overflow-hidden bg-[#F5F5F3]">
           <Image
             src={post.image}
             alt={post.imageAlt}
             fill
-            sizes="96px"
+            sizes="90px"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         </div>
@@ -66,7 +66,7 @@ export function PostCardSmall({ post }: { post: Post }) {
         <h3 className="font-khand font-semibold text-[15px] sm:text-[16px] leading-snug text-[#141414] group-hover:text-[#B5121B] transition-colors line-clamp-3">
           <Link href={`/${post.slug}`}>{post.title}</Link>
         </h3>
-        <time className="font-mukta text-[11px] text-[#999] mt-1 block">{post.date}</time>
+        <time className="font-mukta text-[11px] text-[#aaa] mt-0.5 block">{post.date}</time>
       </div>
     </article>
   )
@@ -78,7 +78,7 @@ export function PostListItem({ post, number }: { post: Post; number?: number }) 
     <article className="group flex items-start gap-2.5 py-2.5 border-b border-[#EBEBEB] last:border-none">
       {number !== undefined && (
         <span
-          className="flex-shrink-0 w-5 h-5 bg-[#B5121B] text-white font-khand text-[11px] font-bold flex items-center justify-center leading-none"
+          className="flex-shrink-0 w-5 h-5 bg-[#B5121B] text-white font-khand text-[11px] font-bold flex items-center justify-center leading-none mt-0.5"
           aria-hidden="true"
         >
           {number}
@@ -94,7 +94,7 @@ export function PostListItem({ post, number }: { post: Post; number?: number }) 
 // ── Archive grid card ─────────────────────────────────────────────────────────
 export function PostCardArchive({ post }: { post: Post }) {
   return (
-    <article className="group border border-[#E0E0E0] bg-white overflow-hidden hover:border-[#B5121B] transition-colors rounded-sm">
+    <article className="group border border-[#E0E0E0] bg-white overflow-hidden hover:border-[#B5121B] transition-colors">
       <Link href={`/${post.slug}`} className="block overflow-hidden">
         <div className="relative w-full aspect-video overflow-hidden bg-[#F5F5F3]">
           <Image
@@ -108,10 +108,10 @@ export function PostCardArchive({ post }: { post: Post }) {
       </Link>
       <div className="p-3">
         <CategoryTag label={post.category} slug={post.categorySlug} />
-        <h2 className="font-khand font-bold text-[16px] sm:text-[17px] leading-snug text-[#141414] group-hover:text-[#B5121B] transition-colors mt-2 mb-1.5 line-clamp-2">
+        <h2 className="font-khand font-bold text-[17px] sm:text-[18px] leading-snug text-[#141414] group-hover:text-[#B5121B] transition-colors mt-1.5 mb-1.5 line-clamp-2">
           <Link href={`/${post.slug}`}>{post.title}</Link>
         </h2>
-        <p className="font-mukta text-[12px] text-[#666] leading-relaxed line-clamp-2 mb-2">{post.excerpt}</p>
+        <p className="font-mukta text-[13px] text-[#666] leading-relaxed line-clamp-2 mb-2">{post.excerpt}</p>
         <div className="flex items-center gap-2 font-mukta text-[11px] text-[#999]">
           <span>{post.author}</span>
           <span aria-hidden="true">·</span>

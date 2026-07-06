@@ -44,7 +44,7 @@ export function DesktopNav({ dark = false }: DesktopNavProps) {
               role="menuitem"
               aria-haspopup={item.children ? "true" : undefined}
               className={[
-                "inline-flex items-center gap-0.5 px-2.5 xl:px-3 py-3 font-khand font-semibold text-[15px] whitespace-nowrap transition-colors",
+                "inline-flex items-center gap-0.5 px-2 xl:px-2.5 py-3 font-khand font-semibold text-[14px] xl:text-[15px] whitespace-nowrap transition-colors",
                 dark
                   ? isActive
                     ? "text-[#ff4d4d] border-b-2 border-[#ff4d4d]"

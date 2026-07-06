@@ -25,7 +25,11 @@ export const NAV_ITEMS = [
 ]
 
 // ─── Desktop horizontal nav ───────────────────────────────────────────────────
-export function DesktopNav() {
+interface DesktopNavProps {
+  dark?: boolean
+}
+
+export function DesktopNav({ dark = false }: DesktopNavProps) {
   const pathname = usePathname()
 
   return (
@@ -41,9 +45,13 @@ export function DesktopNav() {
               aria-haspopup={item.children ? "true" : undefined}
               className={[
                 "inline-flex items-center gap-0.5 px-2.5 xl:px-3 py-3 font-khand font-semibold text-[15px] whitespace-nowrap transition-colors",
-                isActive
-                  ? "text-[#B5121B] border-b-2 border-[#B5121B]"
-                  : "text-[#141414] hover:text-[#B5121B]",
+                dark
+                  ? isActive
+                    ? "text-[#ff4d4d] border-b-2 border-[#ff4d4d]"
+                    : "text-white/85 hover:text-white"
+                  : isActive
+                    ? "text-[#B5121B] border-b-2 border-[#B5121B]"
+                    : "text-[#141414] hover:text-[#B5121B]",
               ].join(" ")}
             >
               {item.label}

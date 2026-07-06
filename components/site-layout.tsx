@@ -1,5 +1,6 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { TajaaButtons } from "@/components/tajaa-buttons"
 
 export function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,6 +8,8 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      {/* Fixed circular FABs — ताजा & लोकप्रिय */}
+      <TajaaButtons />
     </div>
   )
 }

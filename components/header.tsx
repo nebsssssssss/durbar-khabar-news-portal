@@ -1,60 +1,41 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import { Logo } from "@/components/logo"
 import { BreakingTicker } from "@/components/breaking-ticker"
 import { SearchOverlay } from "@/components/search-overlay"
 import { MobileNav, DesktopNav } from "@/components/nav-menu"
 
-// Social icon links shown in the dark nav bar
-const SOCIAL_LINKS = [
-  {
-    label: "Facebook",
-    href: "https://facebook.com/durbarkhabar",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
-      </svg>
-    ),
-  },
-  {
-    label: "X (Twitter)",
-    href: "https://x.com/durbarkhabar",
-    icon: (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-      </svg>
-    ),
-  },
-  {
-    label: "TikTok",
-    href: "https://tiktok.com/@durbarkhabar",
-    icon: (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.16 8.16 0 0 0 4.77 1.52V6.82a4.85 4.85 0 0 1-1-.13z"/>
-      </svg>
-    ),
-  },
-  {
-    label: "YouTube",
-    href: "https://youtube.com/@durbarkhabar",
-    icon: (
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-      </svg>
-    ),
-  },
-  {
-    label: "Trending",
-    href: "/category/trending",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-        <polyline points="17 6 23 6 23 12"/>
-      </svg>
-    ),
-  },
-]
+// Social icon SVGs
+function IconYouTube() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M23.5 6.2a3.01 3.01 0 0 0-2.12-2.13C19.54 3.6 12 3.6 12 3.6s-7.54 0-9.38.47A3.01 3.01 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3.01 3.01 0 0 0 2.12 2.13C4.46 20.4 12 20.4 12 20.4s7.54 0 9.38-.47a3.01 3.01 0 0 0 2.12-2.13A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.54V8.46L15.82 12l-6.07 3.54z"/>
+    </svg>
+  )
+}
+function IconFacebook() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.13 8.44 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99C18.34 21.13 22 16.99 22 12z"/>
+    </svg>
+  )
+}
+function IconX() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.24 2h3.37L14.5 9.72 23 22h-7.14l-4.9-6.45L5.44 22H2.07l7.62-8.23L1 2h7.32l4.43 5.83L18.24 2zM17.1 20h1.87L7.04 3.92H5.04L17.1 20z"/>
+    </svg>
+  )
+}
+function IconTikTok() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.23 8.23 0 0 0 4.81 1.54V6.78a4.85 4.85 0 0 1-1.04-.09z"/>
+    </svg>
+  )
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -74,100 +55,155 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 bg-white">
+      <header className="sticky top-0 z-30 bg-white shadow-sm">
 
-        {/* ── Top strip: big logo + live date/time ── */}
-        {!scrolled && (
-          <div className="border-b border-[#E8E8E8]">
-            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 flex flex-col items-center py-3 sm:py-4 gap-1.5">
-              {/* Logo — large */}
-              <div className="h-14 sm:h-20 md:h-24">
+        {/* ── DESKTOP TOP STRIP: large logo + date/time + social icons ── */}
+        <div
+          className={`hidden lg:block border-b border-[#EBEBEB] transition-all duration-300 overflow-hidden ${
+            scrolled ? "max-h-0 opacity-0 border-none" : "max-h-48 opacity-100"
+          }`}
+          aria-hidden={scrolled}
+        >
+          <div className="max-w-[1280px] mx-auto px-6">
+            {/* Logo row — big and centered */}
+            <div className="flex justify-center pt-5 pb-3">
+              <div className="h-20 xl:h-24">
                 <Logo variant="dark" />
               </div>
-              {/* Live date/time iframe from softnep */}
-              <div className="w-full flex justify-center overflow-hidden" style={{ height: "28px" }}>
+            </div>
+
+            {/* Date + time + social row */}
+            <div className="flex items-center justify-center gap-5 pb-3 flex-wrap">
+              {/* Live date/time iframe */}
+              <div className="overflow-hidden flex-shrink-0" style={{ height: "22px" }}>
                 <iframe
-                  src="https://calendar.softnep.tools/nepalitime/1?template=1&time=yes&second=yes&clock=yes&font_size=15px&hr=yes"
+                  src="https://calendar.softnep.tools/nepalitime/1?template=1&time=yes&second=yes&clock=yes&font_size=14px&hr=yes"
                   title="Nepali Date and Time"
-                  className="border-0 w-full max-w-[600px]"
-                  style={{ height: "28px", overflow: "hidden" }}
+                  className="border-0"
+                  style={{ height: "22px", width: "420px", overflow: "hidden" }}
                   scrolling="no"
                   loading="lazy"
                 />
               </div>
+
+              {/* Divider */}
+              <span className="w-px h-4 bg-[#DCDCDC] flex-shrink-0" aria-hidden="true" />
+
+              {/* Social icons */}
+              <nav aria-label="सामाजिक सञ्जाल">
+                <ul className="flex items-center gap-2.5">
+                  <li>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#FF0000] text-white hover:opacity-90 transition-opacity">
+                      <IconYouTube />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#1877F2] text-white hover:opacity-90 transition-opacity">
+                      <IconFacebook />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#141414] text-white hover:opacity-90 transition-opacity">
+                      <IconX />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#010101] text-white hover:opacity-90 transition-opacity">
+                      <IconTikTok />
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
-        )}
+        </div>
 
-        {/* ── Dark nav bar ── */}
-        <div className={`bg-[#1a1a1a] ${scrolled ? "shadow-[0_2px_12px_rgba(0,0,0,0.25)]" : ""}`}>
-          <div className="max-w-[1280px] mx-auto px-3 sm:px-4">
-            <div className="flex items-center h-11 sm:h-12 gap-2">
+        {/* ── DESKTOP NAV BAR (white with border) + MOBILE full header ── */}
+        <div className={`bg-white border-b border-[#DCDCDC] ${scrolled ? "shadow-md" : ""}`}>
+          <div className="max-w-[1280px] mx-auto px-3 sm:px-4 lg:px-6">
+            <div className="flex items-center h-12 sm:h-13 lg:h-14 gap-2 lg:gap-0">
 
-              {/* LEFT: social icons */}
-              <div className="flex items-center gap-0.5 flex-shrink-0">
-                {SOCIAL_LINKS.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target={s.href.startsWith("http") ? "_blank" : undefined}
-                    rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    aria-label={s.label}
-                    className="w-9 h-9 flex items-center justify-center text-white/70 hover:text-white transition-colors rounded-sm"
-                  >
-                    {s.icon}
-                  </a>
-                ))}
-              </div>
+              {/* ── MOBILE: search left, logo center, hamburger right ── */}
+              {/* DESKTOP: home icon left, nav center, search right */}
 
-              {/* CENTER: desktop nav — hidden on mobile/tablet */}
-              <nav
-                className="hidden lg:flex flex-1 items-center justify-center overflow-hidden"
-                aria-label="मुख्य नेभिगेसन"
-              >
-                <DesktopNav dark />
-              </nav>
-
-              {/* Spacer on mobile so right buttons align right */}
-              <div className="flex-1 lg:hidden" />
-
-              {/* RIGHT: search + hamburger */}
-              <div className="flex items-center gap-0.5 flex-shrink-0">
+              {/* LEFT: search (mobile) / home icon (desktop) */}
+              <div className="flex items-center flex-shrink-0">
+                {/* Mobile search */}
                 <button
                   onClick={() => setSearchOpen(true)}
                   aria-label="खोज खोल्नुहोस्"
-                  className="w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors rounded-sm"
+                  className="lg:hidden w-10 h-10 flex items-center justify-center text-[#444] hover:text-[#B5121B] transition-colors"
                 >
-                  <svg width="19" height="19" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                     <circle cx="9" cy="9" r="5.5"/>
                     <path d="M13.5 13.5l3.5 3.5"/>
                   </svg>
                 </button>
 
-                {/* Compact logo shown in nav bar when scrolled */}
-                {scrolled && (
-                  <div className="hidden lg:block h-6 mx-2 text-white">
-                    <Logo variant="white" />
-                  </div>
-                )}
+                {/* Desktop: home icon */}
+                <Link
+                  href="/"
+                  aria-label="गृहपृष्ठ"
+                  className="hidden lg:flex w-10 h-10 items-center justify-center text-[#141414] hover:text-[#B5121B] transition-colors"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+                    <path d="M9 21V12h6v9"/>
+                  </svg>
+                </Link>
+              </div>
 
+              {/* CENTER: logo (mobile compact scrolled) + desktop nav */}
+              <div className="flex-1 flex items-center justify-center overflow-hidden">
+                {/* Mobile: show small logo always (desktop top strip handles logo) */}
+                <div className="lg:hidden h-8">
+                  <Logo variant="dark" />
+                </div>
+
+                {/* Desktop: nav links + compact logo when scrolled */}
+                <nav className="hidden lg:flex items-center justify-center gap-0 overflow-x-auto" aria-label="मुख्य नेभिगेसन">
+                  {scrolled && (
+                    <div className="h-7 mr-5 flex-shrink-0 border-r border-[#DCDCDC] pr-5">
+                      <Logo variant="dark" />
+                    </div>
+                  )}
+                  <DesktopNav />
+                </nav>
+              </div>
+
+              {/* RIGHT: search (desktop) / hamburger (mobile) */}
+              <div className="flex items-center flex-shrink-0 gap-1">
+                {/* Desktop search */}
+                <button
+                  onClick={() => setSearchOpen(true)}
+                  aria-label="खोज खोल्नुहोस्"
+                  className="hidden lg:flex w-10 h-10 items-center justify-center text-[#141414] hover:text-[#B5121B] transition-colors"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                    <circle cx="9" cy="9" r="5.5"/>
+                    <path d="M13.5 13.5l3.5 3.5"/>
+                  </svg>
+                </button>
+
+                {/* Mobile hamburger */}
                 <button
                   onClick={() => setMobileMenuOpen(true)}
                   aria-label="मेनु खोल्नुहोस्"
                   aria-expanded={mobileMenuOpen}
                   aria-controls="mobile-nav"
-                  className="lg:hidden w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors rounded-sm"
+                  className="lg:hidden w-10 h-10 flex items-center justify-center text-[#444] hover:text-[#B5121B] transition-colors"
                 >
                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                     <path d="M3 5.5h16M3 11h16M3 16.5h16"/>
                   </svg>
                 </button>
               </div>
+
             </div>
           </div>
         </div>
 
-        {/* ── Breaking news ticker ── */}
+        {/* ── Breaking ticker — still inside sticky header ── */}
         <BreakingTicker />
       </header>
 

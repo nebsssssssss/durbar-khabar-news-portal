@@ -18,7 +18,7 @@ export function CategorySection({ title, slug, posts }: CategorySectionProps) {
         <div className="relative">
           <h2
             id={`cat-${slug}`}
-            className="font-khand font-bold text-[18px] sm:text-[20px] uppercase tracking-wide text-[#141414] pb-2"
+            className="font-khand font-bold text-[17px] sm:text-[19px] uppercase tracking-wide text-[#141414] pb-2"
           >
             {title}
           </h2>

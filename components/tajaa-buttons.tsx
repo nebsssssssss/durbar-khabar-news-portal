@@ -14,32 +14,33 @@ export function TajaaButtons() {
 
   return (
     <>
-      <div className="flex items-center gap-3">
-        {/* ताजा pill */}
+      {/*
+        Mobile: single small trending FAB, fixed bottom-right.
+        Desktop: two slightly larger FABs stacked, fixed bottom-right.
+      */}
+      <div className="fixed bottom-5 right-3 z-40 flex flex-col items-center gap-2">
+
+        {/* Flame / ताजा — desktop only */}
         <button
           onClick={() => openWith("tajaa")}
-          className="flex items-center gap-2 bg-[#B5121B] hover:bg-[#9a0f17] active:scale-95 text-white font-khand font-bold text-[15px] px-4 py-2.5 rounded-full transition-all shadow-sm"
-          aria-label="ताजा समाचार हेर्नुहोस्"
+          aria-label="ताजा समाचार"
+          className="hidden md:flex w-10 h-10 rounded-full bg-[#B5121B] hover:bg-[#9a0f17] active:scale-95 text-white items-center justify-center shadow-md transition-all"
         >
-          {/* Flame icon */}
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2C9.26 2 7 4.27 7 7c0 1.74.82 3.28 2.1 4.25C7.82 12.23 7 13.77 7 15.5 7 18.54 9.46 21 12.5 21S18 18.54 18 15.5c0-1.73-.82-3.27-2.1-4.25C17.18 10.28 18 8.74 18 7c0-2.73-2.26-5-6-5zm.5 15.5c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M13.5 0.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 6.53 4 9.12 4 12c0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.65-2.33-8.77-6.5-11.33zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
           </svg>
-          ताजा
         </button>
 
-        {/* लोकप्रिय pill */}
+        {/* Trending — visible on both mobile and desktop */}
         <button
           onClick={() => openWith("popular")}
-          className="flex items-center gap-2 bg-[#B5121B] hover:bg-[#9a0f17] active:scale-95 text-white font-khand font-bold text-[15px] px-4 py-2.5 rounded-full transition-all shadow-sm"
-          aria-label="लोकप्रिय समाचार हेर्नुहोस्"
+          aria-label="लोकप्रिय समाचार"
+          className="flex w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#B5121B] hover:bg-[#9a0f17] active:scale-95 text-white items-center justify-center shadow-md transition-all"
         >
-          {/* Trending arrow icon */}
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-            <polyline points="17 6 23 6 23 12"/>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+            <polyline points="16 7 22 7 22 13" />
           </svg>
-          लोकप्रिय
         </button>
       </div>
 

@@ -1,19 +1,19 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
-import { Inter, Noto_Sans_Devanagari } from "next/font/google"
+import { Khand, Mukta } from "next/font/google"
 import "./globals.css"
 
-const notoDevanagari = Noto_Sans_Devanagari({
-  subsets: ["devanagari"],
+const khand = Khand({
+  subsets: ["devanagari", "latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-devanagari",
+  variable: "--font-khand",
   display: "swap",
 })
 
-const inter = Inter({
-  subsets: ["latin"],
+const mukta = Mukta({
+  subsets: ["devanagari", "latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-inter",
+  variable: "--font-mukta",
   display: "swap",
 })
 
@@ -22,17 +22,11 @@ export const metadata: Metadata = {
   description:
     "दरबार खबर — नेपालको भरपर्दो अनलाइन समाचार पोर्टल। ताजा समाचार, राजनीति, समाज, कूटनीति र विश्व।",
   generator: "v0.app",
-  icons: {
-    icon: [
-      { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
-      { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: "/apple-icon.png",
-  },
 }
 
 export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
   colorScheme: "light",
   themeColor: "#ffffff",
 }
@@ -43,9 +37,10 @@ export default function RootLayout({
   return (
     <html
       lang="ne"
-      className={`${notoDevanagari.variable} ${inter.variable} bg-white`}
+      className={`${khand.variable} ${mukta.variable} bg-white`}
     >
-      <body className="font-sans antialiased">{children}
+      <body className="font-mukta antialiased text-[#141414]">
+        {children}
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>

@@ -9,29 +9,28 @@ const TICKER_HEADLINES = [
 ]
 
 export function BreakingTicker() {
-  // Duplicate items so the scroll looks seamless
   const items = [...TICKER_HEADLINES, ...TICKER_HEADLINES]
 
   return (
-    <div className="bg-[#B5121B] text-white text-sm overflow-hidden" role="marquee" aria-label="ताजा समाचार">
-      <div className="max-w-[1280px] mx-auto flex items-stretch">
-        {/* Badge */}
-        <div className="flex-shrink-0 flex items-center px-3 bg-[#141414] font-bold text-xs tracking-wide z-10">
+    <div className="bg-[#B5121B] text-white overflow-hidden" role="marquee" aria-label="ताजा समाचार">
+      <div className="flex items-stretch">
+        {/* "ताजा" badge */}
+        <div className="flex-shrink-0 flex items-center px-2.5 sm:px-3 bg-[#141414] font-khand font-bold text-[11px] sm:text-xs tracking-widest uppercase">
           ताजा
         </div>
-        {/* Ticker track */}
-        <div className="flex-1 overflow-hidden py-1.5 relative">
-          <div className="ticker-track">
+        {/* Scrolling track */}
+        <div className="flex-1 overflow-hidden relative" style={{ minWidth: 0 }}>
+          <div className="ticker-track py-1 sm:py-1.5">
             {items.map((headline, i) => (
               <span key={i} className="inline-flex items-center">
                 <Link
                   href="/"
-                  className="hover:underline px-2"
+                  className="font-mukta text-[12px] sm:text-[13px] hover:underline underline-offset-2 px-2 sm:px-3 whitespace-nowrap"
                   tabIndex={i < TICKER_HEADLINES.length ? 0 : -1}
                 >
                   {headline}
                 </Link>
-                <span className="text-white/40 mx-1" aria-hidden="true">|</span>
+                <span className="text-white/40 select-none" aria-hidden="true">•</span>
               </span>
             ))}
           </div>

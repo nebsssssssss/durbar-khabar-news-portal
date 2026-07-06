@@ -6,7 +6,9 @@
 
 @theme inline {
   /* Durbar Khabar brand fonts */
-  --font-sans: var(--font-devanagari), var(--font-inter), system-ui, sans-serif;
+  --font-sans: var(--font-mukta), system-ui, sans-serif;
+  --font-khand: var(--font-khand), system-ui, sans-serif;
+  --font-mukta: var(--font-mukta), system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
 
   /* Durbar Khabar brand colors */
@@ -167,16 +169,30 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
   }
-  body {
-    @apply bg-background text-foreground;
-    line-height: 1.6;
+  html {
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
   }
-  /* Force body bg to white for Durbar Khabar (no dark mode) */
   body {
     background-color: #ffffff;
     color: #141414;
+    font-family: var(--font-mukta), system-ui, sans-serif;
+    line-height: 1.65;
+    overflow-x: hidden;
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-khand), system-ui, sans-serif;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  img, svg, video {
+    max-width: 100%;
+    height: auto;
+  }
+  /* Remove inner focus outline on buttons in Firefox */
+  button::-moz-focus-inner { border: 0; }
 }
 
 /* Ticker scroll animation */

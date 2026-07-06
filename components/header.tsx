@@ -13,81 +13,71 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
 
   useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 10)
-    }
+    function onScroll() { setScrolled(window.scrollY > 8) }
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.classList.add("mobile-drawer-open", "overflow-hidden")
-    } else {
-      document.body.classList.remove("mobile-drawer-open", "overflow-hidden")
-    }
-    return () => {
-      document.body.classList.remove("mobile-drawer-open", "overflow-hidden")
-    }
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : ""
+    return () => { document.body.style.overflow = "" }
   }, [mobileMenuOpen])
 
   return (
     <>
-      {/* Sticky wrapper */}
-      <div className={`sticky top-0 z-30 bg-white ${scrolled ? "shadow-md" : "border-b border-[#E0E0E0]"}`}>
-        {/* Topbar */}
+      <div className={`sticky top-0 z-30 bg-white transition-shadow duration-200 ${scrolled ? "shadow-[0_2px_12px_rgba(0,0,0,0.10)]" : "border-b border-[#E0E0E0]"}`}>
+        {/* Top bar */}
         <TopBar />
 
         {/* Main header row */}
-        <div className="max-w-[1280px] mx-auto px-4">
-          <div className="flex items-center justify-between py-2 gap-4">
-            {/* Logo */}
-            <div className={`transition-transform duration-200 ${scrolled ? "scale-[0.87]" : ""} origin-left`}>
-              <Logo variant="dark" height={52} className="hidden lg:block" />
-              <Logo variant="dark" height={38} className="block lg:hidden" />
+        <div className="max-w-[1280px] mx-auto px-3 sm:px-4">
+          <div className="flex items-center justify-between gap-3 py-2 sm:py-2.5">
+
+            {/* Logo — scales on scroll */}
+            <div className={`flex-shrink-0 transition-all duration-200 ${scrolled ? "h-7 sm:h-8" : "h-9 sm:h-11"}`}>
+              <Logo variant="dark" />
             </div>
 
-            {/* Desktop nav */}
-            <div className="hidden lg:flex items-center flex-1 justify-end">
+            {/* Desktop nav — hidden on mobile */}
+            <nav className="hidden lg:flex items-center flex-1 justify-end" aria-label="मुख्य नेभिगेसन">
               <DesktopNav />
-            </div>
+            </nav>
 
-            {/* Actions */}
-            <div className="flex items-center gap-2">
-              {/* Search toggle */}
+            {/* Right action buttons */}
+            <div className="flex items-center gap-0.5 sm:gap-1">
               <button
                 onClick={() => setSearchOpen(true)}
                 aria-label="खोज खोल्नुहोस्"
-                className="p-2 text-[#141414] hover:text-[#B5121B] transition-colors"
+                className="w-9 h-9 flex items-center justify-center text-[#141414] hover:text-[#B5121B] transition-colors rounded-sm"
               >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                  <circle cx="9" cy="9" r="6"/>
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <circle cx="9" cy="9" r="5.5"/>
                   <path d="M13.5 13.5l3.5 3.5"/>
                 </svg>
               </button>
 
-              {/* Hamburger — mobile only */}
+              {/* Hamburger — mobile / tablet only */}
               <button
                 onClick={() => setMobileMenuOpen(true)}
                 aria-label="मेनु खोल्नुहोस्"
                 aria-expanded={mobileMenuOpen}
-                className="lg:hidden p-2 text-[#141414] hover:text-[#B5121B] transition-colors"
+                aria-controls="mobile-nav"
+                className="lg:hidden w-9 h-9 flex items-center justify-center text-[#141414] hover:text-[#B5121B] transition-colors rounded-sm"
               >
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                  <path d="M3 6h16M3 11h16M3 16h16"/>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <path d="M3 5h14M3 10h14M3 15h14"/>
                 </svg>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Breaking ticker */}
+        {/* Breaking news ticker */}
         <BreakingTicker />
       </div>
 
       {/* Mobile drawer */}
-      <MobileNav isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+      <MobileNav id="mobile-nav" isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
       {/* Search overlay */}
       <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />

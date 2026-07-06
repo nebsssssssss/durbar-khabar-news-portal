@@ -14,7 +14,7 @@ export function AdSlot({ size = "leaderboard", className = "" }: AdSlotProps) {
     <div
       role="complementary"
       aria-label="विज्ञापन स्थान"
-      className={`flex items-center justify-center border-2 border-dashed border-[#BDBDBD] bg-[#F5F5F3] text-[#9E9E9E] text-xs font-medium w-full ${className}`}
+      className={`flex items-center justify-center border-2 border-dashed border-[#BDBDBD] bg-[#F5F5F3] text-[#9E9E9E] font-mukta text-[11px] font-medium w-full overflow-hidden ${className}`}
       style={{ minHeight: dims.minH }}
     >
       {dims.label}

@@ -52,7 +52,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             ref={inputRef}
             type="search"
             placeholder="समाचार खोज्नुहोस्..."
-            className="flex-1 text-base outline-none text-[#141414] placeholder-[#757575] bg-transparent"
+            className="flex-1 font-mukta text-[16px] outline-none text-[#141414] placeholder-[#999] bg-transparent"
           />
           <button
             type="button"

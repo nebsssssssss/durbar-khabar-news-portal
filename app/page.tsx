@@ -52,7 +52,7 @@ export default function HomePage() {
 
           {/* Sidebar — desktop only */}
           <aside className="hidden lg:flex flex-col gap-6 w-[300px] flex-shrink-0" aria-label="साइडबार">
-            <div className="sticky top-[106px]">
+            <div className="sticky top-[80px]">
               <InterviewModule posts={interviewPosts} />
               <div className="mt-5">
                 <AdSlot size="sidebar" />

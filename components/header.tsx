@@ -6,7 +6,6 @@ import { Logo } from "@/components/logo"
 import { BreakingTicker } from "@/components/breaking-ticker"
 import { SearchOverlay } from "@/components/search-overlay"
 import { MobileNav, DesktopNav } from "@/components/nav-menu"
-import { TajaaOverlay } from "@/components/tajaa-overlay"
 
 // Social icon SVGs
 function IconYouTube() {
@@ -42,13 +41,6 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [overlayOpen, setOverlayOpen] = useState(false)
-  const [overlayTab, setOverlayTab] = useState<"tajaa" | "popular">("tajaa")
-
-  function openOverlay(tab: "tajaa" | "popular") {
-    setOverlayTab(tab)
-    setOverlayOpen(true)
-  }
 
   useEffect(() => {
     function onScroll() { setScrolled(window.scrollY > 60) }
@@ -74,8 +66,8 @@ export function Header() {
         >
           <div className="max-w-[1280px] mx-auto px-6">
             {/* Logo row — big and centered */}
-            <div className="flex justify-center pt-4 pb-2">
-              <div className="h-14 xl:h-16">
+            <div className="flex justify-center pt-5 pb-3">
+              <div className="h-20 xl:h-24">
                 <Logo variant="dark" />
               </div>
             </div>
@@ -129,7 +121,7 @@ export function Header() {
         {/* ── DESKTOP NAV BAR (white with border) + MOBILE full header ── */}
         <div className={`bg-white border-b border-[#DCDCDC] ${scrolled ? "shadow-md" : ""}`}>
           <div className="max-w-[1280px] mx-auto px-3 sm:px-4 lg:px-6">
-            <div className="flex items-center h-12 lg:h-12 gap-2 lg:gap-0">
+            <div className="flex items-center h-12 sm:h-13 lg:h-14 gap-2 lg:gap-0">
 
               {/* ── MOBILE: search left, logo center, hamburger right ── */}
               {/* DESKTOP: home icon left, nav center, search right */}
@@ -163,8 +155,8 @@ export function Header() {
 
               {/* CENTER: logo (mobile compact scrolled) + desktop nav */}
               <div className="flex-1 flex items-center justify-center overflow-hidden">
-                {/* Mobile: compact logo in nav bar */}
-                <div className="lg:hidden h-7">
+                {/* Mobile: show small logo always (desktop top strip handles logo) */}
+                <div className="lg:hidden h-8">
                   <Logo variant="dark" />
                 </div>
 

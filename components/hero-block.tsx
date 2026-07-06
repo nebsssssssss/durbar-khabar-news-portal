@@ -29,10 +29,10 @@ export function HeroBlock({ featured, secondary }: HeroBlockProps) {
           </Link>
           <div className="pt-3">
             <CategoryTag label={featured.category} slug={featured.categorySlug} />
-            <h1 className="font-khand font-bold text-[21px] sm:text-[24px] lg:text-[26px] leading-snug text-[#141414] group-hover:text-[#B5121B] transition-colors mt-2 mb-1.5">
+            <h1 className="font-khand font-bold text-[22px] sm:text-[26px] lg:text-[28px] leading-snug text-[#141414] group-hover:text-[#B5121B] transition-colors mt-2 mb-2">
               <Link href={`/${featured.slug}`}>{featured.title}</Link>
             </h1>
-            <p className="font-mukta text-[13px] text-[#555] leading-relaxed line-clamp-2 mb-2.5">
+            <p className="font-mukta text-[13px] sm:text-[14px] text-[#555] leading-relaxed line-clamp-2 mb-3">
               {featured.excerpt}
             </p>
             <div className="flex items-center gap-2 font-mukta text-[12px] text-[#888]">
